@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="br.edu.ifma.dai.maurolcsilva.aplicacaoavaliaprofessor.FormularioAvaliacao">
+
+
+    <TextView
+        android:id="@+id/lblFormularioDisciplina"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Disciplina:"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/spnFormularioDisciplina"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/lblFormularioProfessor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Professor:"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/spnFormularioProfessor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/lblFormularioAula"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Aula:"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/txtFormularioAula"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/lblFormularioNota"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nota:"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:id="@+id/rdgFormularioNotas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rdFormularioNota10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="10.0" />
+
+        <RadioButton
+            android:id="@+id/rdFormularioNota9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="9.0" />
+
+        <RadioButton
+            android:id="@+id/rdFormularioNota8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="8.0" />
+
+        <RadioButton
+            android:id="@+id/rdFormularioNota7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="7.0" />
+
+        <RadioButton
+            android:id="@+id/rdFormularioNota6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="6.0" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/lblFormularioObservacoes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Observações:"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <CheckBox
+        android:id="@+id/chkFormularioAtrasado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chegou Atrasado" />
+
+    <CheckBox
+        android:id="@+id/chkFormularioDuvidas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tirou dúvidas dos alunos" />
+
+    <Button
+        android:id="@+id/btnFormularioEnviar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ENVIAR" />
+
+</LinearLayout>
