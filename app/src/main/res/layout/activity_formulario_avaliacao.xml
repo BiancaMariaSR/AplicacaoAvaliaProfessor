@@ -124,6 +124,7 @@
         android:id="@+id/btnFormularioEnviar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ENVIAR" />
+        android:text="ENVIAR"
+        android:onClick="salvarAvaliaProfessor"/>
 
 </LinearLayout>

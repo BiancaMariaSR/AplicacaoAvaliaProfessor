@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">AplicacaoAvaliaProfessor</string>
+    <string-array name="disciplinas">
+        <item>Dispositivos Móveis</item>
+        <item>Análise II</item>
+        <item>Laboratório de BD</item>
+        <item>Padrõs de Projeto</item>
+    </string-array>
+    <string-array name="professores">
+        <item>Mauro</item>
+        <item>Carla</item>
+        <item>João</item>
+        <item>Helder</item>
+    </string-array>
 </resources>
