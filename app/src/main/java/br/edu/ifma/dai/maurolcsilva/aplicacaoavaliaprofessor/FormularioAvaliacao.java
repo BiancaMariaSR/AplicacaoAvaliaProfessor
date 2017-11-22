@@ -1,5 +1,8 @@
 package br.edu.ifma.dai.maurolcsilva.aplicacaoavaliaprofessor;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +11,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import util.CriaBD;
 
 public class FormularioAvaliacao extends AppCompatActivity {
 
@@ -71,6 +77,45 @@ public class FormularioAvaliacao extends AppCompatActivity {
         //Recuperação da aula dada no dia ministrada pelo professor
         aula = txtAula.getText().toString();
 
+        //Recuperação dos itens selecionados nos Spinners
+        disciplina = spnDisciplinas.getSelectedItem().toString();
+        professor = spnProfessores.getSelectedItem().toString();
 
+        //Criar uma instancia da classe que cria o Banco de Dados
+        //A primeira vez, ele rodará o onCreate
+        CriaBD criabd = new CriaBD(this);
+        //Recuperamos uma referencia do banco para escrita
+        SQLiteDatabase db = criabd.getWritableDatabase();
+        //Criando uma estrutura de chave e valores a serem armazenados no Banco de Dados
+        //As chaves são os campos da tabela
+        ContentValues valores = new ContentValues();
+        valores.put("disciplina",disciplina);
+        valores.put("nome",professor);
+        valores.put("aula",aula);
+        valores.put("nota",nota);
+        valores.put("observacao",observacoes);
+        db.insert("avaliaprofessor",null,valores);
+    }
+
+    public void listarAvaliaProfessor(View v){
+
+        //Array contendo as colunas que serão usadas no SELECT
+        String colunas[] = {"disciplina","nome","aula","nota","observacao"};
+        CriaBD criabd = new CriaBD(this);
+        //Recuperamos uma referência do banco de dados para apenas leitura
+        SQLiteDatabase db = criabd.getReadableDatabase();
+        //Utilização de um objeto cursor para iterar pelos valores
+        //retornados na execução do SELECT
+        Cursor cursor = db.query(false,"avaliaprofessor",colunas,null,null,null,null,null,null);
+        //Verificamos se a quantidade de registros retornados é maior que 0
+        if(cursor.getCount() > 0){
+            //Iteramos entre os dados obtidos
+            while(cursor.moveToNext()){
+                //Recuperamos a coluna "nome", se quiséssemos a nota por exemplo
+                //usaríamos cursor.getInt(3), atribuindo este a uma variável inteira
+                String nomeprofessor = cursor.getString(1);
+                Toast.makeText(this,nomeprofessor,Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

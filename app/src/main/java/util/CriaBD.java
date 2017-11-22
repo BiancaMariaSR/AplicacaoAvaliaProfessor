@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class CriaBD extends SQLiteOpenHelper {
 
-    private static final String DB_NAME = "";
+    private static final String DB_NAME = "bdavaliaprofessor.db";
     private static final int DB_VERSION = 1;
     private String comandosql;
 
