@@ -13,6 +13,10 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import dao.DAOAvaliaProfessor;
+import modelo.AvaliaProfessor;
 import util.CriaBD;
 
 public class FormularioAvaliacao extends AppCompatActivity {
@@ -81,24 +85,31 @@ public class FormularioAvaliacao extends AppCompatActivity {
         disciplina = spnDisciplinas.getSelectedItem().toString();
         professor = spnProfessores.getSelectedItem().toString();
 
-        //Criar uma instancia da classe que cria o Banco de Dados
-        //A primeira vez, ele rodará o onCreate
-        CriaBD criabd = new CriaBD(this);
-        //Recuperamos uma referencia do banco para escrita
-        SQLiteDatabase db = criabd.getWritableDatabase();
-        //Criando uma estrutura de chave e valores a serem armazenados no Banco de Dados
-        //As chaves são os campos da tabela
-        ContentValues valores = new ContentValues();
-        valores.put("disciplina",disciplina);
-        valores.put("nome",professor);
-        valores.put("aula",aula);
-        valores.put("nota",nota);
-        valores.put("observacao",observacoes);
-        db.insert("avaliaprofessor",null,valores);
+        //Criacao do objeto baseado na classe de modelo
+        AvaliaProfessor avaliaprof = new AvaliaProfessor();
+        avaliaprof.setDisciplina(disciplina);
+        avaliaprof.setProfessor(professor);
+        avaliaprof.setAula(aula);
+        avaliaprof.setNota(nota);
+        avaliaprof.setObservacoes(observacoes);
+        //Criacao do objeto DAO
+        DAOAvaliaProfessor daoavalia = new DAOAvaliaProfessor(this);
+        if (daoavalia.salvar(avaliaprof)){
+            Toast.makeText(this,"Dados salvos com sucesso!!!",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(this,"Falha na Salva dos Dados!!!",Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void listarAvaliaProfessor(View v){
 
+        ArrayList<AvaliaProfessor> listaavaliaprofessores;
+        DAOAvaliaProfessor daoavalia = new DAOAvaliaProfessor(this);
+        listaavaliaprofessores = daoavalia.listar();
+        for (AvaliaProfessor avp:listaavaliaprofessores) {
+            Toast.makeText(this,avp.getProfessor(),Toast.LENGTH_SHORT).show();
+        }
         //Array contendo as colunas que serão usadas no SELECT
         String colunas[] = {"disciplina","nome","aula","nota","observacao"};
         CriaBD criabd = new CriaBD(this);
@@ -114,7 +125,7 @@ public class FormularioAvaliacao extends AppCompatActivity {
                 //Recuperamos a coluna "nome", se quiséssemos a nota por exemplo
                 //usaríamos cursor.getInt(3), atribuindo este a uma variável inteira
                 String nomeprofessor = cursor.getString(1);
-                Toast.makeText(this,nomeprofessor,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this,nomeprofessor,Toast.LENGTH_SHORT).show();
             }
         }
     }
