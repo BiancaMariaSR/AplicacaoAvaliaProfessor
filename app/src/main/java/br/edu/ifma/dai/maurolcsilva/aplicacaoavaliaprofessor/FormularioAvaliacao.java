@@ -1,6 +1,7 @@
 package br.edu.ifma.dai.maurolcsilva.aplicacaoavaliaprofessor;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -104,29 +105,33 @@ public class FormularioAvaliacao extends AppCompatActivity {
 
     public void listarAvaliaProfessor(View v){
 
-        ArrayList<AvaliaProfessor> listaavaliaprofessores;
-        DAOAvaliaProfessor daoavalia = new DAOAvaliaProfessor(this);
-        listaavaliaprofessores = daoavalia.listar();
-        for (AvaliaProfessor avp:listaavaliaprofessores) {
-            Toast.makeText(this,avp.getProfessor(),Toast.LENGTH_SHORT).show();
-        }
+        //Ao clicar no botão listar iremos acionar
+        //a Activity ListagemAvaliacao que contem nosso
+        Intent it = new Intent(this,ListagemAvaliacao.class);
+        startActivity(it);
+        //ArrayList<AvaliaProfessor> listaavaliaprofessores;
+        //DAOAvaliaProfessor daoavalia = new DAOAvaliaProfessor(this);
+        //listaavaliaprofessores = daoavalia.listar();
+        //for (AvaliaProfessor avp:listaavaliaprofessores) {
+        //    Toast.makeText(this,avp.getProfessor(),Toast.LENGTH_SHORT).show();
+        //}
         //Array contendo as colunas que serão usadas no SELECT
-        String colunas[] = {"disciplina","nome","aula","nota","observacao"};
-        CriaBD criabd = new CriaBD(this);
+        //String colunas[] = {"disciplina","nome","aula","nota","observacao"};
+        //CriaBD criabd = new CriaBD(this);
         //Recuperamos uma referência do banco de dados para apenas leitura
-        SQLiteDatabase db = criabd.getReadableDatabase();
+        //SQLiteDatabase db = criabd.getReadableDatabase();
         //Utilização de um objeto cursor para iterar pelos valores
         //retornados na execução do SELECT
-        Cursor cursor = db.query(false,"avaliaprofessor",colunas,null,null,null,null,null,null);
+        //Cursor cursor = db.query(false,"avaliaprofessor",colunas,null,null,null,null,null,null);
         //Verificamos se a quantidade de registros retornados é maior que 0
-        if(cursor.getCount() > 0){
+        //if(cursor.getCount() > 0){
             //Iteramos entre os dados obtidos
-            while(cursor.moveToNext()){
+            //while(cursor.moveToNext()){
                 //Recuperamos a coluna "nome", se quiséssemos a nota por exemplo
                 //usaríamos cursor.getInt(3), atribuindo este a uma variável inteira
-                String nomeprofessor = cursor.getString(1);
+                //String nomeprofessor = cursor.getString(1);
                 //Toast.makeText(this,nomeprofessor,Toast.LENGTH_SHORT).show();
-            }
-        }
+            //}
+        //}
     }
 }

@@ -11,11 +11,17 @@ import br.edu.ifma.dai.maurolcsilva.aplicacaoavaliaprofessor.R;
  */
 
 public class MeuViewHolderAvaliacao extends RecyclerView.ViewHolder {
+    //Devemos colocar como atributos do nosso ViewHolder os componentes
+    //que fazem parte do layout do nosso RecyclerView
     final TextView lblDisciplina;
     final TextView lblProfessor;
 
     public MeuViewHolderAvaliacao(View itemView) {
         super(itemView);
+        //Usamos o layout transformado em componente java para recuperar
+        //os elementos xml usando findviewbyid
+        //A partir deste momento o ViewHolder passa a ter os componentes java
+        //dentro dele
         lblDisciplina = (TextView) itemView.findViewById(R.id.lblListaDisciplina);
         lblProfessor = (TextView) itemView.findViewById(R.id.lblListaProfessor);
     }
