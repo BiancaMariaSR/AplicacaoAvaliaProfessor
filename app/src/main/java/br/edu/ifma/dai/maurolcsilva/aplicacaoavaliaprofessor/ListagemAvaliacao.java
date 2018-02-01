@@ -18,6 +18,7 @@ public class ListagemAvaliacao extends AppCompatActivity {
         //Recuperamos o componente RecyclerView do layout para dentro
         //da implementação Java
         meurecyclerview = (RecyclerView) findViewById(R.id.rcvListagemdeAvaliacoes);
+        meurecyclerview.hasFixedSize();
         //Usamos um gerenciador de layout para definir como os dados serão apresentados
         //no RecyclerView
         LinearLayoutManager nossolayout = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);

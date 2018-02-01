@@ -46,7 +46,7 @@ public class DAOAvaliaProfessor {
     public ArrayList<AvaliaProfessor> listar(){
         listadeavaliacoes = new ArrayList<AvaliaProfessor>();
         //Array contendo as colunas que serão usadas no SELECT
-        String colunas[] = {"disciplina","nome","aula","nota","observacao"};
+        String colunas[] = {"idavaliaprof","disciplina","nome","aula","nota","observacao"};
         //Utilização de um objeto cursor para iterar pelos valores
         //retornados na execução do SELECT
         cursor = gw.getDatabase().query("avaliaprofessor",colunas,null,null,null,null,null);
@@ -55,11 +55,12 @@ public class DAOAvaliaProfessor {
             //Iteramos entre os dados obtidos
             while(cursor.moveToNext()){
                 AvaliaProfessor avaliaprof = new AvaliaProfessor();
-                avaliaprof.setDisciplina(cursor.getString(0));
-                avaliaprof.setProfessor(cursor.getString(1));
-                avaliaprof.setAula(cursor.getString(2));
-                avaliaprof.setNota(cursor.getInt(3));
-                avaliaprof.setObservacoes(cursor.getString(4));
+                avaliaprof.setIdavaliaprof(cursor.getInt(0));
+                avaliaprof.setDisciplina(cursor.getString(1));
+                avaliaprof.setProfessor(cursor.getString(2));
+                avaliaprof.setAula(cursor.getString(3));
+                avaliaprof.setNota(cursor.getInt(4));
+                avaliaprof.setObservacoes(cursor.getString(5));
                 listadeavaliacoes.add(avaliaprof);
 
             }
@@ -67,6 +68,20 @@ public class DAOAvaliaProfessor {
 
         return (listadeavaliacoes);
 
+    }
+
+    public boolean deletar(AvaliaProfessor avaliaprof){
+        long resultado;
+        boolean retorno = false;
+        int idavaliaprof = avaliaprof.getIdavaliaprof();
+
+        resultado = gw.getDatabase().delete("avaliaprofessor","idavaliaprof = ?",new String[] {String.valueOf(idavaliaprof)});
+
+        if (resultado > 0)
+            retorno = true;
+
+
+        return (retorno);
     }
 
 

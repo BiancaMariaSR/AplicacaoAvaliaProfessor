@@ -5,10 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import br.edu.ifma.dai.maurolcsilva.aplicacaoavaliaprofessor.R;
+import dao.DAOAvaliaProfessor;
 import modelo.AvaliaProfessor;
 
 /**
@@ -43,7 +45,7 @@ public class AdapterAvaliacao extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
         //Este método conecta os dados de uma entidade e os coloca em um componente visual
         //Este método será chamado várias vezes, enquanto tiver dados na lista de dados da entidade
@@ -56,6 +58,26 @@ public class AdapterAvaliacao extends RecyclerView.Adapter {
         //e setar a eles os valores que serão apresentados na lista do recyclerview
         mvh.lblDisciplina.setText(avp.getDisciplina());
         mvh.lblProfessor.setText(avp.getProfessor());
+        //Associamos o evento de clique ao botão que foi adicionado ao layout
+        //do RecyclerView
+        mvh.btnAdicionar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DAOAvaliaProfessor daoavaliaprofessor = new DAOAvaliaProfessor(ctx);
+                //Será deletado o item da lista que foi clicado
+                if (daoavaliaprofessor.deletar(listadeavaliacoes.get(position))){
+                    //Remover o item da lista
+                    listadeavaliacoes.remove(position);
+                    //Faz a notificação de que um item da lista foi removido
+                    //Esta chamada atualiza o RecyclerView
+                    notifyItemRemoved(position);
+                }
+                else {
+                    Toast.makeText(ctx,"Não Excluído",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
     }
 
@@ -63,4 +85,5 @@ public class AdapterAvaliacao extends RecyclerView.Adapter {
     public int getItemCount() {
         return listadeavaliacoes.size();
     }
+
 }
